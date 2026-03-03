@@ -1,0 +1,97 @@
+---
+import { FAQ_ITEMS } from "../data/site";
+---
+
+<section class="section bg-muted" aria-labelledby="faq-heading">
+  <div class="container">
+    <div class="max-w-3xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <p class="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+          FAQ
+        </p>
+        <h2 id="faq-heading" class="text-3xl font-bold text-foreground sm:text-4xl">
+          Frequently asked questions
+        </h2>
+        <p class="mt-4 text-muted-foreground leading-relaxed">
+          Everything you need to know about working with us.
+        </p>
+      </div>
+
+      <!-- Accordion -->
+      <div class="flex flex-col gap-3" role="list">
+        {FAQ_ITEMS.map((item, index) => (
+          <div
+            class="faq-item rounded-xl border border-border bg-background overflow-hidden"
+            data-faq-index={index}
+            role="listitem"
+          >
+            <button
+              class="faq-trigger flex items-center justify-between w-full px-6 py-5 text-left text-foreground font-medium hover:bg-muted/40 transition-colors duration-200"
+              aria-expanded="false"
+              aria-controls={`faq-answer-${index}`}
+              type="button"
+            >
+              <span class="pr-4">{item.question}</span>
+              <svg
+                class="faq-icon w-5 h-5 flex-shrink-0 text-muted-foreground transition-transform duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </button>
+            <div
+              id={`faq-answer-${index}`}
+              class="faq-content"
+              style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;"
+              role="region"
+            >
+              <p class="px-6 pb-5 text-muted-foreground leading-relaxed">
+                {item.answer}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll(".faq-trigger").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const item = trigger.closest(".faq-item");
+      if (!item) return;
+
+      const content = item.querySelector(".faq-content") as HTMLElement;
+      const icon = item.querySelector(".faq-icon") as HTMLElement;
+      const isOpen = trigger.getAttribute("aria-expanded") === "true";
+
+      // Close all other items
+      document.querySelectorAll(".faq-item").forEach((other) => {
+        if (other !== item) {
+          const otherContent = other.querySelector(".faq-content") as HTMLElement;
+          const otherIcon = other.querySelector(".faq-icon") as HTMLElement;
+          const otherTrigger = other.querySelector(".faq-trigger");
+          if (otherContent) otherContent.style.maxHeight = "0";
+          if (otherIcon) otherIcon.style.transform = "rotate(0deg)";
+          if (otherTrigger) otherTrigger.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      // Toggle current item
+      if (isOpen) {
+        content.style.maxHeight = "0";
+        icon.style.transform = "rotate(0deg)";
+        trigger.setAttribute("aria-expanded", "false");
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        icon.style.transform = "rotate(45deg)";
+        trigger.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+</script>

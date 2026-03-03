@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Services from "../components/Services.astro";
+import Testimonials from "../components/Testimonials.astro";
+import CTA from "../components/CTA.astro";
+---
+
+<BaseLayout title="Services" description="Explore our comprehensive range of services designed to help your business grow and succeed.">
+  <!-- Page Hero -->
+  <section class="section" aria-labelledby="services-page-heading">
+    <div class="container">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+          Our Services
+        </p>
+        <h1 id="services-page-heading" class="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl">
+          End-to-end solutions for modern businesses
+        </h1>
+        <p class="mt-6 text-lg text-muted-foreground leading-relaxed">
+          From initial strategy to ongoing support, we provide everything you need to build, grow, and sustain a successful digital presence.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Services />
+
+  <!-- Process Section -->
+  <section class="section bg-muted" aria-labelledby="process-heading">
+    <div class="container">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <p class="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+          Our Process
+        </p>
+        <h2 id="process-heading" class="text-3xl font-bold text-foreground sm:text-4xl">
+          How we work
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 gap-8 max-w-4xl mx-auto sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { step: "01", title: "Discovery", desc: "We dive deep into your business, goals, and challenges to build a strong strategic foundation." },
+          { step: "02", title: "Strategy", desc: "Our team crafts a tailored plan with clear milestones, deliverables, and success metrics." },
+          { step: "03", title: "Execution", desc: "We bring the strategy to life with meticulous attention to detail and iterative feedback loops." },
+          { step: "04", title: "Growth", desc: "Post-launch, we continuously optimize and scale your solution for sustainable long-term growth." },
+        ].map((item) => (
+          <div class="relative">
+            <span class="text-5xl font-bold text-border">{item.step}</span>
+            <h3 class="mt-4 text-lg font-semibold text-foreground">{item.title}</h3>
+            <p class="mt-2 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Testimonials />
+  <CTA />
+</BaseLayout>

@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image}
+  type="article"
+  publishedDate={post.data.pubDate.toISOString()}
+  author={post.data.author}
+>
+  <article class="section">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <!-- Back Link -->
+        <a
+          href="/blog"
+          class="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 mb-8 group"
+        >
+          <svg class="w-4 h-4 mr-2 transition-transform duration-200 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+          Back to blog
+        </a>
+
+        <!-- Article Header -->
+        <header class="mb-10">
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-4">
+              {post.data.tags.map((tag: string) => (
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground border border-border">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <h1 class="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
+            {post.data.title}
+          </h1>
+
+          <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
+            {post.data.description}
+          </p>
+
+          <div class="flex items-center gap-4 mt-8 pt-8 border-t border-border">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-muted text-foreground font-semibold text-sm">
+              {post.data.author.split(" ").map((n: string) => n[0]).join("")}
+            </div>
+            <div>
+              <p class="text-sm font-medium text-foreground">{post.data.author}</p>
+              <time
+                datetime={post.data.pubDate.toISOString()}
+                class="text-sm text-muted-foreground"
+              >
+                {post.data.pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
+          </div>
+        </header>
+
+        <!-- Article Content -->
+        <div class="prose">
+          <Content />
+        </div>
+
+        <!-- Article Footer -->
+        <footer class="mt-16 pt-8 border-t border-border">
+          <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+            <p class="text-sm text-muted-foreground">
+              Written by <span class="font-medium text-foreground">{post.data.author}</span>
+            </p>
+            <a
+              href="/blog"
+              class="inline-flex items-center text-sm font-medium text-foreground hover:text-foreground/70 transition-colors duration-200 group"
+            >
+              More articles
+              <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
