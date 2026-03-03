@@ -4,7 +4,7 @@
    Design System - CSS Custom Properties
    ============================================ */
 
-@theme {
+@theme inline {
   --color-primary: #0a0a0a;
   --color-primary-foreground: #fafafa;
   --color-background: #fafafa;

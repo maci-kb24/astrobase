@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Astro.js business website boilerplate with Tailwind CSS v4",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host 0.0.0.0 --port 3000",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
