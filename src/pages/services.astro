@@ -1,8 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Services from "../components/Services.astro";
+import ServicesList from "../components/Services.astro";
 import Testimonials from "../components/Testimonials.astro";
 import CTA from "../components/CTA.astro";
+
+const ServicesComponent = ServicesList;
 ---
 
 <BaseLayout title="Services" description="Explore our comprehensive range of services designed to help your business grow and succeed.">
@@ -23,7 +25,7 @@ import CTA from "../components/CTA.astro";
     </div>
   </section>
 
-  <Services />
+  <ServicesComponent />
 
   <!-- Process Section -->
   <section class="section bg-muted" aria-labelledby="process-heading">

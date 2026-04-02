@@ -1,5 +1,7 @@
 ---
-import { SITE, NAV_ITEMS, SERVICES, SOCIAL_LINKS } from "../data/site";
+import { SITE_CONFIG } from "../config";
+import { NAV_ITEMS, SOCIAL_LINKS } from "../config";
+import { SERVICES } from "../contants/data"; 
 
 const currentYear = new Date().getFullYear();
 ---
@@ -10,10 +12,10 @@ const currentYear = new Date().getFullYear();
       <!-- Company Info -->
       <div class="sm:col-span-2 lg:col-span-1">
         <a href="/" class="text-xl font-bold tracking-tight">
-          {SITE.name}
+          {SITE_CONFIG.name}
         </a>
         <p class="mt-4 text-sm leading-relaxed text-background/70 max-w-xs">
-          {SITE.description}
+          {SITE_CONFIG.description}
         </p>
         <div class="flex items-center gap-4 mt-6">
           {SOCIAL_LINKS.map((link) => (
@@ -89,17 +91,17 @@ const currentYear = new Date().getFullYear();
         </h3>
         <ul class="flex flex-col gap-3 text-sm text-background/70" role="list">
           <li>
-            <a href={`mailto:${SITE.email}`} class="hover:text-background transition-colors duration-200">
-              {SITE.email}
+            <a href={`mailto:${SITE_CONFIG.email}`} class="hover:text-background transition-colors duration-200">
+              {SITE_CONFIG.email}
             </a>
           </li>
           <li>
-            <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} class="hover:text-background transition-colors duration-200">
-              {SITE.phone}
+            <a href={`tel:${SITE_CONFIG.phone.replace(/\s/g, "")}`} class="hover:text-background transition-colors duration-200">
+              {SITE_CONFIG.phone}
             </a>
           </li>
-          <li>{SITE.address}</li>
-          <li>{SITE.hours}</li>
+          <li>{SITE_CONFIG.address}</li>
+          <li>{SITE_CONFIG.hours}</li>
         </ul>
       </div>
     </div>
@@ -107,7 +109,7 @@ const currentYear = new Date().getFullYear();
     <!-- Bottom Bar -->
     <div class="mt-12 pt-8 border-t border-background/10 flex flex-col items-center justify-between gap-4 sm:flex-row">
       <p class="text-sm text-background/50">
-        &copy; {currentYear} {SITE.name}. All rights reserved.
+        &copy; {currentYear} {SITE_CONFIG.name}. All rights reserved.
       </p>
       <div class="flex items-center gap-6">
         <a href="#" class="text-sm text-background/50 hover:text-background transition-colors duration-200">
