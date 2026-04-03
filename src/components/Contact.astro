@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../config';
+import { SITE_CONFIG } from '../config';
 ---
 
 <section class="section" aria-labelledby="contact-heading">
@@ -95,8 +95,8 @@ import { SITE } from '../config';
               </div>
               <div>
                 <h3 class="text-sm font-semibold text-foreground">Email</h3>
-                <a href={`mailto:${SITE.email}`} class="mt-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {SITE.email}
+                <a href={`mailto:${SITE_CONFIG.email}`} class="mt-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {SITE_CONFIG.email}
                 </a>
               </div>
             </div>
@@ -111,8 +111,8 @@ import { SITE } from '../config';
               </div>
               <div>
                 <h3 class="text-sm font-semibold text-foreground">Phone</h3>
-                <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} class="mt-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  {SITE.phone}
+                <a href={`tel:${SITE_CONFIG.phone.replace(/\s/g, "")}`} class="mt-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {SITE_CONFIG.phone}
                 </a>
               </div>
             </div>
@@ -128,7 +128,7 @@ import { SITE } from '../config';
               </div>
               <div>
                 <h3 class="text-sm font-semibold text-foreground">Office</h3>
-                <p class="mt-1 text-sm text-muted-foreground">{SITE.address}</p>
+                <p class="mt-1 text-sm text-muted-foreground">{SITE_CONFIG.address}</p>
               </div>
             </div>
           </div>
@@ -142,7 +142,7 @@ import { SITE } from '../config';
               </div>
               <div>
                 <h3 class="text-sm font-semibold text-foreground">Hours</h3>
-                <p class="mt-1 text-sm text-muted-foreground">{SITE.hours}</p>
+                <p class="mt-1 text-sm text-muted-foreground">{SITE_CONFIG.hours}</p>
               </div>
             </div>
           </div>
